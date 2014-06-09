@@ -1,9 +1,14 @@
 Avahi Aliases
 =============
 
-This extension comprises both the components to manage Avahi aliases, and an
-Aegir extension to allow automatic creation of such aliases as sites are
-provisioned.
+This extension comprises several components. These include:
+
+* A daemon to manage Avahi aliases.
+* An extension to integrate with Aegir.
+* Install Puppet module.
+
+Avahi Aliases integrates with Aegir to allow automatic creation of such aliases
+as sites are provisioned.
 
 
 Install
@@ -24,6 +29,16 @@ Aegir integration
       /etc/sudoers.d/aegir-avahi
     # chmod 440 /etc/sudoers.d/aegir-avahi
     # ln -s /var/aegir/config/avahi-aliases /etc/avahi/aliases.d/aegir
+
+Puppet module
+-------------
+
+    # git clone git://github.com/PraxisLabs/avahi-aliases.git \
+      <puppet_dir>/modules/avahi
+
+Then simply include the avahi class:
+
+    include avahi
 
 
 Uninstall
