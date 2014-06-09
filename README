@@ -1,67 +1,74 @@
 Avahi Aliases
 =============
-Copyright 2013 Zenobius Jiricek
 
-This work is licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License. To view a copy of this license, visit:
-	http://creativecommons.org/licenses/by-sa/3.0/.
-
-Basically:
- 1. You can use this for commerical and personal projects.
- 2. You must give me credit in your product.
- 3. If you alter, transform, or build upon this work, you may
-    distribute the resulting work only under the same or similar
-    license to this one.
-
-But you should really read the full liscense :
-
-	http://creativecommons.org/licenses/by-sa/3.0/
+This extension comprises both the components to manage Avahi aliases, and an
+Aegir extension to allow automatic creation of such aliases as site are
+provisioned.
 
 
 Install
-==========
+=======
 
-```
-sudo apt-get install python-avahi
-sudo pip install git+git://github.com/airtonix/avahi-aliases.git
-```
+Avahi aliases service
+---------------------
+
+    # apt-get install python-avahi pip
+    # pip install git+git://github.com/PraxisLabs/avahi-aliases.git
+
+Aegir integration
+-----------------
+
+    # git clone git://github.com/PraxisLabs/avahi-aliases.git \
+      /var/aegir/.drush/provision_avahi
+    # cp /var/aegir/.drush/provision_avahi/files/aegir-avahi.sudoers \
+      /etc/sudoers.d/aegir-avahi
+    # chmod 440 /etc/sudoers.d/aegir-avahi
+    # ln -s /var/aegir/config/avahi-aliases /etc/avahi/aliases.d/aegir
+
 
 Uninstall
 ==========
 
-```
-sudo pip uninstall avahi-aliases
-```
+    sudo pip uninstall avahi-aliases
 
 
 Usage
 ==========
 
-Daemon Control:
------------------
-```
-	sudo start avahi-aliases
-	sudo restart avahi-aliases
-	sudo stop avahi-aliases
-```
+Daemon Control
+--------------
+
+    # service avahi-aliases start
+    # service avahi-aliases restart
+    # service avahi-aliases stop
 
 Creating Aliases
------------------
-1. `sudo nano /etc/avahi/aliases.d/default`
-2. insert something.local on a new line
-3. save
-4. ???
-5. profit
+----------------
+
+    # echo something.local >> /etc/avahi/aliases.d/default
+    # service avahi-aliases restart
 
 Notes:
-	* aliases must end in `.local`
-	* One alias per line
-	* blank lines are ignored
-	* lines prefixed with `#` are ignored
-	* you must manually restart the daemon after modifying alias files
+
+* Aliases must end in `.local`
+* One alias per line
+* Blank lines and lines prefixed with `#` are ignored
+* You must manually restart the daemon after modifying alias files
 
 Todo
 =====
 
 1. implement `sudo avahi-alias add/remove aliasname`
 2. implement `sudo avahi-alias list`
+
+
+License
+=======
+Original copyright 2013 Zenobius Jiricek
+see: https://github.com/airtonix/avahi-aliases
+
+This work is licensed under the Creative Commons Attribution-ShareAlike 3.0
+Unported License. To view a copy of this license, visit:
+
+    http://creativecommons.org/licenses/by-sa/3.0/.
 
