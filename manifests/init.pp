@@ -1,14 +1,14 @@
 class avahi inherits aegir::defaults {
 
   # Install dependencies.
-  package {['python-avahi', 'python-pip']:
+  package {['python-avahi', 'python-pip', 'avahi-daemon']:
     ensure  => present,
   }
 
   # Install daemon.
   exec { 'avahi pip':
     command => '/usr/bin/pip install git+git://github.com/PraxisLabs/avahi-aliases.git',
-    require => Package['python-avahi', 'python-pip'],
+    require => Package['python-avahi', 'python-pip', 'avahi-daemon'],
   }
 
   # Install Provision extension.
@@ -32,6 +32,8 @@ class avahi inherits aegir::defaults {
   file {'/var/aegir/config/avahi-aliases':
     ensure  => present,
     require => $aegir_installed,
+    owner   => 'aegir',
+    group   => 'aegir',
   }
   file {'/etc/avahi/aliases.d/aegir':
     target  => '/var/aegir/config/avahi-aliases',
