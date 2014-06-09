@@ -1,4 +1,4 @@
-class avahi {
+class avahi inherits aegir::defaults {
 
   # Install dependencies.
   package {['python-avahi', 'python-pip']:
@@ -17,6 +17,7 @@ class avahi {
     git_repo => 'git://github.com/PraxisLabs/avahi-aliases.git',
     dir_name => 'provision_avahi',
     user     => 'aegir',
+    require  => $aegir_installed,
   }
 
   # Allow 'aegir' user to restart the avahi-aliases daemon.
@@ -28,9 +29,14 @@ class avahi {
   }
 
   # Provide a file for aegir to register installed sites.
+  file {'/var/aegir/config/avahi-aliases':
+    ensure  => present,
+    require => $aegir_installed,
+  }
   file {'/etc/avahi/aliases.d/aegir':
-    target => '/var/aegir/config/avahi-aliases',
-    ensure => 'link',
+    target  => '/var/aegir/config/avahi-aliases',
+    ensure  => link,
+    require => File['/var/aegir/config/avahi-aliases'],
   }
 
 }
