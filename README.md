@@ -2,7 +2,7 @@ Avahi Aliases
 =============
 
 This extension comprises both the components to manage Avahi aliases, and an
-Aegir extension to allow automatic creation of such aliases as site are
+Aegir extension to allow automatic creation of such aliases as sites are
 provisioned.
 
 
@@ -55,6 +55,13 @@ Notes:
 * Blank lines and lines prefixed with `#` are ignored
 * You must manually restart the daemon after modifying alias files
 
+Aegir Integration
+-----------------
+
+Aegir integration is automatic, though you will need to clear the Drush
+commandfile cache.
+
+
 Todo
 =====
 
@@ -64,6 +71,7 @@ Todo
 
 License
 =======
+
 Original copyright 2013 Zenobius Jiricek
 see: https://github.com/airtonix/avahi-aliases
 
@@ -72,3 +80,5 @@ Unported License. To view a copy of this license, visit:
 
     http://creativecommons.org/licenses/by-sa/3.0/.
 
+Additional code is copyright 2014 Praxis Labs Coop, and published under the
+GNU General Public License 3.0 or later http://www.gnu.org/copyleft/gpl.html.
